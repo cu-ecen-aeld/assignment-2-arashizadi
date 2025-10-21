@@ -18,9 +18,7 @@ void test_validate_my_username()
 
     char *maybe_matched_user = malloc_username_from_conf_file();
 
-    bool result = !strcmp(user, maybe_matched_user);
-
-    TEST_ASSERT_TRUE_MESSAGE(result, "AESD students, please fix me!");
+    TEST_ASSERT_EQUAL_STRING_MESSAGE(user, maybe_matched_user, "Unmatched username");
 
     free(maybe_matched_user);
 }
