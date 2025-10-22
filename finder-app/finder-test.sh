@@ -8,8 +8,8 @@ set -u
 NUMFILES=10
 WRITESTR=AELD_IS_FUN
 WRITEDIR=/tmp/aeld-data
-PROJ_DIR=$DEVBOX_PROJECT_ROOT # See: https://www.jetify.com/docs/devbox/env-variables
-FINDER_DIR="$DEVBOX_PROJECT_ROOT/finder-app"
+PROJ_DIR=$(git rev-parse --show-toplevel)
+FINDER_DIR="$PROJ_DIR/finder-app"
 username=$(cat conf/username.txt)
 
 if [ $# -lt 3 ]
