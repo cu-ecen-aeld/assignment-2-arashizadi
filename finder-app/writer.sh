@@ -35,7 +35,6 @@ check_ok_status() {
 }
 
 validate_input "$@"
-
 writefile=$1
 writestr=$2
 
