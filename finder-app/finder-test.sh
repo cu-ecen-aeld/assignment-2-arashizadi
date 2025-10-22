@@ -3,7 +3,6 @@
 # Author: Siddhant Jajoo
 
 set -eu
-set -x
 
 NUMFILES=10
 WRITESTR=AELD_IS_FUN
@@ -54,7 +53,7 @@ fi
 #make clean
 #make
 
-for i in $( seq 1 $NUMFILES)
+for i in $(seq 1 $NUMFILES)
 do
 	$FINDER_DIR/writer.sh "$WRITEDIR/${username}$i.txt" "$WRITESTR"
 done
@@ -67,6 +66,7 @@ rm -rf /tmp/aeld-data
 set +e
 if printf '%s' "$OUTPUTSTRING" | grep -F -- "$MATCHSTR" >/dev/null; then
     echo "success"
+	exit 0
 else
     echo "failed: expected  ${MATCHSTR} in ${OUTPUTSTRING} but instead found"
     exit 1

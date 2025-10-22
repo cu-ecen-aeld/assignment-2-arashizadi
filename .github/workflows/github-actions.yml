@@ -11,7 +11,7 @@ jobs:
     test:
         runs-on: ubuntu-22.04
         steps:
-          - uses: actions/checkout@v5
+          - uses: actions/checkout@v2
           - name: Checkout submodules
             run: git submodule update --init --recursive
           - name: Install Devbox packages 
