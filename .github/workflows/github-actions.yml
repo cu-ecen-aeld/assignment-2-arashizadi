@@ -5,6 +5,8 @@ on:
             - '*'
         branches:
             - '*'
+permissions:
+  contents: write
 jobs:
     test:
         runs-on: ubuntu-22.04
@@ -15,6 +17,6 @@ jobs:
           - name: Install Devbox packages 
             uses: jetify-com/devbox-install-action@v0.14.0
           - name: Run unit test
-            run: timeout 2m ./unit-test.sh
+            run: timeout 1m ./unit-test.sh
           - name: Run full test
-            run: timeout 2m ./full-test.sh
+            run: timeout 1m ./full-test.sh
