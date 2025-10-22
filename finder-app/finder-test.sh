@@ -2,11 +2,9 @@
 # Tester script for assignment 1 and assignment 2
 # Author: Siddhant Jajoo
 
-set -e
-set -u
-set -euxo pipefail
+set -eu
+set -x
 
-start=$(date +%s)
 NUMFILES=10
 WRITESTR=AELD_IS_FUN
 WRITEDIR=/tmp/aeld-data
@@ -67,14 +65,9 @@ OUTPUTSTRING=$($FINDER_DIR/finder.sh "$WRITEDIR" "$WRITESTR")
 rm -rf /tmp/aeld-data
 
 set +e
-echo ${OUTPUTSTRING} | grep "${MATCHSTR}"
-
-end=$(date +%s); echo "full-test.sh took $((end-start))s"
-
-if [ $? -eq 0 ]; then
-	echo "success"
-	exit 0
+if printf '%s' "$OUTPUTSTRING" | grep -F -- "$MATCHSTR" >/dev/null; then
+    echo "success"
 else
-	echo "failed: expected  ${MATCHSTR} in ${OUTPUTSTRING} but instead found"
-	exit 1
+    echo "failed: expected  ${MATCHSTR} in ${OUTPUTSTRING} but instead found"
+    exit 1
 fi
