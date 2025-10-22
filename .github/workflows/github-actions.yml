@@ -5,16 +5,22 @@ on:
             - '*'
         branches:
             - '*'
-permissions:
-  contents: write
 jobs:
-    test:
-        runs-on: ubuntu-22.04
+    unit-test:
+        container: cuaesd/aesd-autotest:24-unit-test
+        runs-on: self-hosted
         steps:
           - uses: actions/checkout@v2
           - name: Checkout submodules
-            run: git submodule update --init --recursive
-          - name: Install Devbox packages 
-            uses: jetify-com/devbox-install-action@v0.14.0
-          - name: Run test
-            run: timeout 2m ./full-test.sh
+            run : git submodule update --init --recursive
+          - name: Run unit test
+            run: ./unit-test.sh
+    full-test:
+        container: cuaesd/aesd-autotest:24-assignment1
+        runs-on: self-hosted
+        steps:
+          - uses: actions/checkout@v2
+          - name: Checkout submodules
+            run : git submodule update --init --recursive
+          - name: Run full test
+            run: ./full-test.sh
