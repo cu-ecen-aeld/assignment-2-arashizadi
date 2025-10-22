@@ -6,16 +6,19 @@ on:
         branches:
             - '*'
 jobs:
-    test:
+    unit-test:
         runs-on: ubuntu-22.04
         steps:
           - uses: actions/checkout@v5
           - name: Checkout submodules
             run: git submodule update --init --recursive
-          - name: create tmp dir
-            run: mkdir /tmp
           - name: Run unit test
             run: ./unit-test.sh
+    full-test:
+        runs-on: ubuntu-22.04
+        steps:
+          - uses: actions/checkout@v5
+          - name: Checkout submodules
+            run: git submodule update --init --recursive
           - name: Run full test
             run: ./full-test.sh
-
