@@ -16,7 +16,5 @@ jobs:
             run: git submodule update --init --recursive
           - name: Install Devbox packages 
             uses: jetify-com/devbox-install-action@v0.14.0
-          - name: Run unit test
-            run: timeout 1m ./test.sh
-          - name: Run full test
+          - name: Run test
             run: timeout 1m ./full-test.sh

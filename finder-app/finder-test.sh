@@ -8,6 +8,8 @@ set -u
 NUMFILES=10
 WRITESTR=AELD_IS_FUN
 WRITEDIR=/tmp/aeld-data
+PROJ_DIR=$DEVBOX_PROJECT_ROOT # See: https://www.jetify.com/docs/devbox/env-variables
+FINDER_DIR="$DEVBOX_PROJECT_ROOT/finder-app"
 username=$(cat conf/username.txt)
 
 if [ $# -lt 3 ]
@@ -32,7 +34,7 @@ echo "Writing ${NUMFILES} files containing string ${WRITESTR} to ${WRITEDIR}"
 rm -rf "${WRITEDIR}"
 
 # create $WRITEDIR if not assignment1
-assignment=`cat ../conf/assignment.txt`
+assignment=`cat $PROJ_DIR/conf/assignment.txt`
 
 if [ $assignment != 'assignment1' ]
 then
@@ -54,10 +56,10 @@ fi
 
 for i in $( seq 1 $NUMFILES)
 do
-	./writer.sh "$WRITEDIR/${username}$i.txt" "$WRITESTR"
+	$FINDER_DIR/writer.sh "$WRITEDIR/${username}$i.txt" "$WRITESTR"
 done
 
-OUTPUTSTRING=$(./finder.sh "$WRITEDIR" "$WRITESTR")
+OUTPUTSTRING=$($FINDER_DIR/finder.sh "$WRITEDIR" "$WRITESTR")
 
 # remove temporary directories
 rm -rf /tmp/aeld-data
