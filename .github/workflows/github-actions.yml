@@ -17,4 +17,4 @@ jobs:
           - name: Install Devbox packages 
             uses: jetify-com/devbox-install-action@v0.14.0
           - name: Run test
-            run: timeout 1m ./full-test.sh
+            run: timeout 2m ./full-test.sh

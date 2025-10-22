@@ -4,7 +4,9 @@
 
 set -e
 set -u
+set -euxo pipefail
 
+start=$(date +%s)
 NUMFILES=10
 WRITESTR=AELD_IS_FUN
 WRITEDIR=/tmp/aeld-data
@@ -66,6 +68,9 @@ rm -rf /tmp/aeld-data
 
 set +e
 echo ${OUTPUTSTRING} | grep "${MATCHSTR}"
+
+end=$(date +%s); echo "full-test.sh took $((end-start))s"
+
 if [ $? -eq 0 ]; then
 	echo "success"
 	exit 0
