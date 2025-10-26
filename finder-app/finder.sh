@@ -40,6 +40,7 @@ check_ok_status() {
 }
 
 validate_input "$@"
+
 filesdir=$1
 searchstr=$2
 
