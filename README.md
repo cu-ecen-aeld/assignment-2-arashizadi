@@ -1,5 +1,5 @@
 # Github Actions Status
-![Assignment-1 Build Status](https://github.com/cu-ecen-aeld/assignment-1-arashizadi-1/actions/workflows/github-actions.yml/badge.svg)
+![Assignment-1 Build Status](https://github.com/cu-ecen-aeld/assignment-2-arashizadi/actions/workflows/github-actions.yml/badge.svg)
 
 ***
 
