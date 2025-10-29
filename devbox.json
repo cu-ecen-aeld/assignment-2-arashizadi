@@ -1,16 +1,32 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.16.0/.schema/devbox.schema.json",
+  "env": {
+    "ARM_GNU_TOOLCHAIN_VER": "arm-gnu-toolchain-13.3.rel1-x86_64-aarch64-none-linux-gnu",
+    "PATH": "$PATH:/nix/store/5i9wqcy57a4x03f1mvdpaxw8fhhl79dh-python3-3.8.12/bin/:$DEVBOX_PROJECT_ROOT/arm-gnu-toolchain-13.3.rel1-x86_64-aarch64-none-linux-gnu/bin",
+    "PYTHONHOME": "/nix/store/5i9wqcy57a4x03f1mvdpaxw8fhhl79dh-python3-3.8.12/",
+    "PYTHONPATH": "/nix/store/5i9wqcy57a4x03f1mvdpaxw8fhhl79dh-python3-3.8.12/lib/python3.8"
+  },
   "packages": [
     "cmake@3.31.7",
-    "ruby@latest"
+    "ruby@latest",
+    "python@3.8.18",
+    "python38Packages.pipx@latest"
   ],
   "shell": {
     "init_hook": [
-      "echo 'Welcome to devbox!' > /dev/null"
+      "echo 'run: `aarch64-none-linux-gnu-cpp --version` to check if initial setup was successful, if not, try `devbox run setup` and modify the env vars as instructed.'"
     ],
     "scripts": {
-      "test": [
-        "echo \"Error: no test specified\" && exit 1"
+      "setup": [
+        "echo '1) Setup Arm GNU Toolchain:\n'",
+        "echo 'Downloading $ARM_GNU_TOOLCHAIN_VER'",
+        "curl -L -o $ARM_GNU_TOOLCHAIN_VER.tar.xz https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/$ARM_GNU_TOOLCHAIN_VER.tar.xz",
+        "echo 'Un-taring and remove archive'",
+        "tar -xJf $ARM_GNU_TOOLCHAIN_VER.tar.xz",
+        "rm $ARM_GNU_TOOLCHAIN_VER.tar.xz",
+        "echo '\n\n2) Setup Python References:\n'",
+        "whereis python | grep /nix/store",
+        "echo '\nSetup is completed! Next step: update PATH, PYTHONHOME, and PYTHONPATH env vars in devbox.json file to point to the shown installed python path (not the one with appended `-profile`), then exit and re-enter `devbox shell`.'"
       ]
     }
   }

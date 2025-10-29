@@ -49,13 +49,14 @@ then
 		exit 1
 	fi
 fi
-#echo "Removing the old writer utility and compiling as a native application"
-#make clean
-#make
+
+echo "Rebuilding native writer application"
+make -C "$FINDER_DIR" clean
+make -C "$FINDER_DIR"
 
 for i in $(seq 1 $NUMFILES)
 do
-	$FINDER_DIR/writer.sh "$WRITEDIR/${username}$i.txt" "$WRITESTR"
+	$FINDER_DIR/writer "$WRITEDIR/${username}$i.txt" "$WRITESTR"
 done
 
 OUTPUTSTRING=$($FINDER_DIR/finder.sh "$WRITEDIR" "$WRITESTR")
