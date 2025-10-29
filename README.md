@@ -20,9 +20,6 @@ Ignores Devbox configs and ARM GNU Toolchain src.
 - ### Jetify Devbox Support
 [Devbox](https://www.jetify.com/devbox) creates an ephemeral shell locally which helps to bootstrap the environment specific to project. The benefit of this is that since I have other projects running on my Pi, each installed package only works within the same Devbox shell instance, making my Pi bloat-free. Furthermore I'm able to install specific versions of each package compatible with project requirements. For this project, I specified to install the latest ruby version and cmake v3.31 which is the latest compatible version avaialble in nix store (where Devbox installs package from). To see the configurations, checkout [devbox.json](https://github.com/cu-ecen-aeld/assignment-1-arashizadi-1/blob/main/devbox.json). In practice, whenever I run `devbox shell`, it would install those packages if they're not already in cache and as soon as I exit the shell, it would unlink those packages, making them unavailable on my primary shell. I also added a custom shell script for setting up arm-gnu-toolchain and Python 3.8, when `devbox run setup` gets executed.
 
-- ### Note on using arm64 arch, instead of x64 locally
-Things are working so far. The good thing is that my custom runner is x64 so in practice, I test my code in both arm64 and x64.
-
 *END OF STUDENT'S NOTE*
 
 ***
