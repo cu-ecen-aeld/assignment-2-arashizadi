@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.16.0/.schema/devbox.schema.json",
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
   "env": {
     "ARM_GNU_TOOLCHAIN_VER": "arm-gnu-toolchain-13.3.rel1-x86_64-aarch64-none-linux-gnu",
     "PATH": "$PATH:/nix/store/5i9wqcy57a4x03f1mvdpaxw8fhhl79dh-python3-3.8.12/bin/:$DEVBOX_PROJECT_ROOT/arm-gnu-toolchain-13.3.rel1-x86_64-aarch64-none-linux-gnu/bin",
