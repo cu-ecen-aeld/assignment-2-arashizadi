@@ -13,8 +13,6 @@ jobs:
           - uses: actions/checkout@v5
           - name: Checkout submodules
             run : git submodule update --init --recursive
-          - name: install dependencies
-            uses: jetify-com/devbox-install-action@v0.14.0
           - name: Run unit test
             run: ./unit-test.sh
     full-test:
@@ -24,7 +22,5 @@ jobs:
           - uses: actions/checkout@v5
           - name: Checkout submodules
             run : git submodule update --init --recursive
-          - name: install dependencies
-            uses: jetify-com/devbox-install-action@v0.14.0
           - name: Run full test
             run: ./full-test.sh
