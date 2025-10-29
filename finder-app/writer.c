@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <syslog.h>
 
 static void show_help(const char *prog) {
     fprintf(stdout,
@@ -50,25 +51,36 @@ int main(int argc, char **argv) {
     if (flag_status < 0) 
         return 1;
 
+    openlog(argv[0], LOG_PID, LOG_USER);
+
     const char *writefile = argv[1];
     const char *writestr  = argv[2];
 
     FILE *fp = fopen(writefile, "w");
     if (!fp) {
+        syslog(LOG_ERR, "Failed to open file %s: %s", writefile, strerror(errno));
         perror("Error opening file");
+        closelog();
         return 1;
     }
 
+    syslog(LOG_DEBUG, "Writing %s to %s", writestr, writefile);
+
     if (fputs(writestr, fp) == EOF) {
+        syslog(LOG_ERR, "Failed to write string to %s: %s", writefile, strerror(errno));
         perror("Error writing file");
         fclose(fp);
+        closelog();
         return 1;
     }
 
     if (fclose(fp) != 0) {
+        syslog(LOG_ERR, "Failed to close file %s: %s", writefile, strerror(errno));
         perror("Error closing file");
+        closelog();
         return 1;
     }
 
+    closelog();
     return 0;
 }
